@@ -49,7 +49,13 @@
       </p>
     </header>
     <main>
-      <p>Ticket #4471 merged every date report into one known issue and named a single fix: the parser reads the month first, and the tenants write the day first. The reports are separate problems. Each one has its own ticket. The counts below are computed from the export.</p>
+      <p>Ticket #4471 merged every date report into one known issue and named a single fix: the parser reads the month first, and the tenants write the day first. The reports are separate problems. Each one has its own ticket:</p>
+      <ul>
+        <li>parser: <a href="https://github.com/AdamBurawski/mega-s01e03-what-it-shows/issues/1">issue 1</a></li>
+        <li>hint: <a href="https://github.com/AdamBurawski/mega-s01e03-what-it-shows/issues/2">issue 2</a></li>
+        <li>one-day move: <a href="https://github.com/AdamBurawski/mega-s01e03-what-it-shows/issues/3">issue 3</a></li>
+      </ul>
+      <p>The counts below are computed from the export.</p>
       <h2>Parser</h2>
       <p>The shared parser reads every date month first. A day-first tenant's dates come out flipped. This is every report that did not arrive through booking-v3's form, except the one-day moves.</p>
       <h2>Hint</h2>

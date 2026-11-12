@@ -16,7 +16,13 @@ signature: Adam Burawski
 
 Ticket #4471 merged every date report into one known issue and named a single fix: the parser
 reads the month first, and the tenants write the day first. The reports are separate problems.
-Each one has its own ticket. The counts below are computed from the export.
+Each one has its own ticket:
+
+- parser: https://github.com/AdamBurawski/mega-s01e03-what-it-shows/issues/1
+- hint: https://github.com/AdamBurawski/mega-s01e03-what-it-shows/issues/2
+- one-day move: https://github.com/AdamBurawski/mega-s01e03-what-it-shows/issues/3
+
+The counts below are computed from the export.
 
 ## Parser
 
