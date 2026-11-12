@@ -1,47 +1,41 @@
 ---
 layout: runbook
-title: '4471 · three date problems'
+title: '4471 · two date problems'
 owner: Adam Burawski
 status: open
 reviewed: "2026-11-12"
-signature: Adam Burawski
+signature: "v1.eyJzdWIiOiI1NTE3IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTQ1MTMyMDIsImV4cCI6MTc5NDU5OTYwMn0.-Tuy6Hqg20XcSLqGTJn7oTir81QnPDZp_palEP2_M0o"
 ---
 
 <script>
-  import ProblemTable from '#lib/kb/ProblemTable.svelte';
+  import CauseTable from '#lib/kb/CauseTable.svelte';
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
 
-  const signature = 'Adam Burawski';
+  const signature = 'v1.eyJzdWIiOiI1NTE3IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTQ1MTMyMDIsImV4cCI6MTc5NDU5OTYwMn0.-Tuy6Hqg20XcSLqGTJn7oTir81QnPDZp_palEP2_M0o';
 </script>
 
 Ticket #4471 merged every date report into one known issue and named a single fix: the parser
-reads the month first, and the tenants write the day first. The reports are separate problems.
-Each one has its own ticket:
+reads the month first, and the tenants write the day first. The desk's own view of the export
+has two causes. Each one has its own ticket:
 
 - parser: https://github.com/AdamBurawski/mega-s01e03-what-it-shows/issues/1
 - hint: https://github.com/AdamBurawski/mega-s01e03-what-it-shows/issues/2
-- one-day move: https://github.com/AdamBurawski/mega-s01e03-what-it-shows/issues/3
 
-The counts below are computed from the export.
+The counts below are the desk's, from the export.
 
 ## Parser
 
 The shared parser reads every date month first. A day-first tenant's dates come out flipped.
-This is every report that did not arrive through booking-v3's form, except the one-day moves.
+This is every report that did not arrive through booking-v3's form. The reports the desk also
+reads as a one-day move stay in this count. The desk footnotes them. They are not a third cause.
 
 ## Hint
 
 booking-v3 prints `MM/DD/YYYY` under its date field. The form still reads the date the tenant's
 way, day first. People type the order the hint shows. This is a different bug from the parser,
-and it only arrives on the form channel.
+and it only arrives on the form channel. The desk merged these reports into #4471. They are not
+that ticket's cause.
 
-## One-day move
-
-The desk read some reports as a shift of one day and listed their ids in `desk-notes.json`.
-They were filed under the parser cause because of the tenant. The calendar day moves, and the
-month and the day do not trade places. One of them is the same meeting shown on Tuesday in
-Lisbon and on Monday in Toronto.
-
-<ProblemTable ticket={4471} />
+<CauseTable ticket={4471} />
 
 <RenderStamp {signature} />

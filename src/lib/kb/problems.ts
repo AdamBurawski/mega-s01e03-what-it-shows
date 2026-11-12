@@ -1,16 +1,14 @@
-// The three problems filed inside ticket 4471. Pages explain them; this file counts them.
+// The causes filed inside ticket 4471, counted the way the desk's export counts them.
 import { causeOf, uniqueById, type Report, type Tenant } from './causes.ts';
 
-export type Problem = 'parser' | 'hint' | 'one-day' | 'unplaced';
+export type Problem = 'parser' | 'hint' | 'unplaced';
 
-// A one-day move is listed by id in desk-notes. It was filed under the tenant's cause.
-// Split it out first, so a report is not counted twice.
+// A one-day move stays in the tenant's cause. The desk footnotes it; it is not its own cause.
 export function problemOf(
   report: Pick<Report, 'id' | 'channel'>,
   tenant: Tenant | undefined,
-  oneDayIds: readonly string[],
+  _oneDayIds: readonly string[],
 ): Problem {
-  if (oneDayIds.includes(report.id)) return 'one-day';
   return causeOf(report, tenant) ?? 'unplaced';
 }
 
@@ -31,7 +29,7 @@ export function groupProblems(
     const problem = problemOf(report, tenantOf(report), oneDayIds);
     byProblem.set(problem, [...(byProblem.get(problem) ?? []), report]);
   }
-  const order: Problem[] = ['parser', 'hint', 'one-day', 'unplaced'];
+  const order: Problem[] = ['parser', 'hint', 'unplaced'];
   return order
     .filter((problem) => byProblem.has(problem))
     .map((problem) => {

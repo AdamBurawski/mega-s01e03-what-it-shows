@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>4471 · three date problems · support kb</title>
+  <title>4471 · two date problems · support kb</title>
   <style>
     
   :root {
@@ -30,9 +30,11 @@
   .banner { background: var(--warn-bg); color: var(--warn); padding: 0.6rem 1rem; border-radius: 6px; }
   footer { margin-top: 3rem; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--line); padding-top: 1rem; }
 
-    .channels { color: var(--muted); font-size: 0.85em; }
+    .tags { color: var(--muted); font-size: 0.85em; }
     .note { color: var(--muted); font-size: 0.85em; }
     .sum { font-size: 1.1rem; }
+    .wrong td { background: var(--warn-bg); }
+    .wrong td:last-child { color: var(--warn); font-weight: 600; }
     .stamp { margin: 2rem 0 0; font: 0.85rem var(--mono); color: var(--muted); }
     .stamp b { color: var(--accent); letter-spacing: 0.04em; }
   </style>
@@ -41,7 +43,7 @@
   <div class="kb">
     <header>
       <a class="crumb" href="/kb">support desk · kb</a>
-      <h1>4471 · three date problems</h1>
+      <h1>4471 · two date problems</h1>
       <p class="meta">
         <span>owner <b>Adam Burawski</b></span>
         <span class="status open">open</span>
@@ -49,45 +51,41 @@
       </p>
     </header>
     <main>
-      <p>Ticket #4471 merged every date report into one known issue and named a single fix: the parser reads the month first, and the tenants write the day first. The reports are separate problems. Each one has its own ticket:</p>
+      <p>Ticket #4471 merged every date report into one known issue and named a single fix: the parser reads the month first, and the tenants write the day first. The desk's own view of the export has two causes. Each one has its own ticket:</p>
       <ul>
         <li>parser: <a href="https://github.com/AdamBurawski/mega-s01e03-what-it-shows/issues/1">issue 1</a></li>
         <li>hint: <a href="https://github.com/AdamBurawski/mega-s01e03-what-it-shows/issues/2">issue 2</a></li>
-        <li>one-day move: <a href="https://github.com/AdamBurawski/mega-s01e03-what-it-shows/issues/3">issue 3</a></li>
       </ul>
-      <p>The counts below are computed from the export.</p>
+      <p>The counts below are the desk's, from the export.</p>
       <h2>Parser</h2>
-      <p>The shared parser reads every date month first. A day-first tenant's dates come out flipped. This is every report that did not arrive through booking-v3's form, except the one-day moves.</p>
+      <p>The shared parser reads every date month first. A day-first tenant's dates come out flipped. This is every report that did not arrive through booking-v3's form. The reports the desk also reads as a one-day move stay in this count. The desk footnotes them. They are not a third cause.</p>
       <h2>Hint</h2>
-      <p>booking-v3 prints <code>MM/DD/YYYY</code> under its date field. The form still reads the date the tenant's way, day first. People type the order the hint shows. This is a different bug from the parser, and it only arrives on the form channel.</p>
-      <h2>One-day move</h2>
-      <p>The desk read some reports as a shift of one day and listed their ids in <code>desk-notes.json</code>. They were filed under the parser cause because of the tenant. The calendar day moves, and the month and the day do not trade places. One of them is the same meeting shown on Tuesday in Lisbon and on Monday in Toronto.</p>
-      <p class="sum"><strong>412</strong> distinct reports in #4471 · <strong>3</strong> problems</p>
+      <p>booking-v3 prints <code>MM/DD/YYYY</code> under its date field. The form still reads the date the tenant's way, day first. People type the order the hint shows. This is a different bug from the parser, and it only arrives on the form channel. The desk merged these reports into #4471. They are not that ticket's cause.</p>
+      <p class="sum"><strong>412</strong> reports merged into #4471 · <strong>2</strong> causes</p>
       <table>
-        <thead><tr><th>problem</th><th>reports</th><th>channels</th><th>tenants</th></tr></thead>
+        <thead><tr><th>cause</th><th>reports</th><th>tagged as</th><th>tenants</th><th>seen</th><th></th></tr></thead>
         <tbody>
           <tr>
         <td><code>parser</code></td>
-        <td>374</td>
-        <td class="channels">app ×202 · email ×147 · form ×25</td>
+        <td>379</td>
+        <td class="tags">parser ×356 · hint ×23</td>
         <td>11</td>
+        <td>2026-04-01 → 2026-10-04</td>
+        <td>#4471</td>
       </tr>
-<tr>
+<tr class="wrong">
         <td><code>hint</code></td>
         <td>33</td>
-        <td class="channels">form ×33</td>
+        <td class="tags">hint ×18 · parser ×15</td>
         <td>3</td>
-      </tr>
-<tr>
-        <td><code>one-day</code></td>
-        <td>5</td>
-        <td class="channels">email ×3 · app ×2</td>
-        <td>5</td>
+        <td>2026-04-17 → 2026-09-22</td>
+        <td>not this ticket — no ticket of its own</td>
       </tr>
         </tbody>
       </table>
-      <p class="note">Intake's tag differs from the tenant's cause on 38 reports. Those reports stay in the cause the tenant and the form give them.</p>
-      <p class="stamp">desk ref <b>DR-Q807-A40W</b></p>
+      <p class="note">5 reports read as a one-day move; filed under <code>parser</code> by tenant.</p>
+
+      <p class="stamp">desk ref <b>DR-2P0A-7PSQ</b></p>
     </main>
     <footer>Pages are written by people. Tables and charts are built from data at render time.</footer>
   </div>
