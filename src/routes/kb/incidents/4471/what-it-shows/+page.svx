@@ -1,0 +1,41 @@
+---
+layout: runbook
+title: '4471 · three date problems'
+owner: Adam Burawski
+status: open
+reviewed: "2026-11-12"
+signature: Adam Burawski
+---
+
+<script>
+  import ProblemTable from '#lib/kb/ProblemTable.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+
+  const signature = 'Adam Burawski';
+</script>
+
+Ticket #4471 merged every date report into one known issue and named a single fix: the parser
+reads the month first, and the tenants write the day first. The reports are separate problems.
+Each one has its own ticket. The counts below are computed from the export.
+
+## Parser
+
+The shared parser reads every date month first. A day-first tenant's dates come out flipped.
+This is every report that did not arrive through booking-v3's form, except the one-day moves.
+
+## Hint
+
+booking-v3 prints `MM/DD/YYYY` under its date field. The form still reads the date the tenant's
+way, day first. People type the order the hint shows. This is a different bug from the parser,
+and it only arrives on the form channel.
+
+## One-day move
+
+The desk read some reports as a shift of one day and listed their ids in `desk-notes.json`.
+They were filed under the parser cause because of the tenant. The calendar day moves, and the
+month and the day do not trade places. One of them is the same meeting shown on Tuesday in
+Lisbon and on Monday in Toronto.
+
+<ProblemTable ticket={4471} />
+
+<RenderStamp {signature} />
